@@ -14,12 +14,12 @@ import java.util.List;
 
 /**
  * @author recheard
- * @description:
+ * @description:  rpc远程调用测试
  * @date 2021/6/2517:56
  */
 @RestController
 @RequestMapping("order")
-public class OrderController {
+public class RpcTestController {
 
     @Autowired
     private DiscoveryClient discoveryClient;

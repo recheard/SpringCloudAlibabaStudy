@@ -44,7 +44,7 @@ public class RpcTestController {
     }
 
     /**
-     * 通过
+     * 通过ribbon调用服务
      * @return
      */
     @GetMapping("test_ribbon")
@@ -69,6 +69,7 @@ public class RpcTestController {
         String result = new RestTemplate().getForObject(uri + "/test/test1", String.class);
         return "order service get result for member-service:" + result;
     }
+
 
 
 

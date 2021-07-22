@@ -25,12 +25,15 @@ public class OrderController {
     @Autowired
     private RestTemplate restTemplate;
 
+    int index = 0;
+
     @GetMapping("test")
     public String test () {
         //获取指定服务的节点列表
         List<ServiceInstance> memberServiceList = discoveryClient.getInstances("member-service");
-        //获取第一个节点 uri内容为节点ip加端口
-        URI uri = memberServiceList.get(0).getUri();
+        //轮询获取服务节点 uri内容为节点ip加端口
+        URI uri = memberServiceList.get(index % memberServiceList.size()).getUri();
+        index++;
         //通过restTemplate访问
         String result = restTemplate.getForObject(uri + "/test/test1", String.class);
         return "order service get result for member-service:" + result;

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.alibaba.test</groupId>
+    <artifactId>alibaba-test</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>member-server</module>
+        <module>order-service</module>
+    </modules>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <spring-cloud-alibaba.version>2.2.4.RELEASE</spring-cloud-alibaba.version>
+        <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- hutool工具类-->
+        <!--<dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.3.8</version>
+        </dependency>
+    </dependencies>
+
+
+    <profiles>
+        <!-- 开发 -->
+        <profile>
+            <id>dev</id>
+            <activation>
+                <!--默认激活配置-->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!--当前环境-->
+                <profile.name>dev</profile.name>
+                <!--Nacos配置中心地址-->
+                <config.server-addr>127.0.0.1:8849</config.server-addr>
+                <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <config.namespace></config.namespace>
+                <!--Nacos配置分组名称-->
+                <config.group>DEFAULT_GROUP</config.group>
+                <!--Nacos服务发现地址-->
+                <discovery.server-addr>127.0.0.1:8849</discovery.server-addr>
+            </properties>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <!--当前环境-->
+                <profile.name>test</profile.name>
+                <!--Nacos配置中心地址-->
+                <config.server-addr>127.0.0.1:8849</config.server-addr>
+                <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <config.namespace></config.namespace>
+                <!--Nacos配置分组名称-->
+                <config.group>DEFAULT_GROUP</config.group>
+                <packageOutPutPath></packageOutPutPath>
+                <!--Nacos服务发现地址-->
+                <discovery.server-addr>127.0.0.1:8849</discovery.server-addr>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <!--当前环境,生产环境为空-->
+                <profile.name>prod</profile.name>
+                <!--Nacos配置中心地址-->
+                <config.server-addr>127.0.0.1:8849</config.server-addr>
+                <!--Nacos配置中心命名空间,用于支持多环境.这里必须使用ID，不能使用名称,默认为空-->
+                <config.namespace></config.namespace>
+                <!--Nacos配置分组名称-->
+                <config.group>DEFAULT_GROUP</config.group>
+                <packageOutPutPath></packageOutPutPath>
+                <!--Nacos服务发现地址-->
+                <discovery.server-addr>127.0.0.1:8849</discovery.server-addr>
+            </properties>
+
+        </profile>
+    </profiles>
+
+    <!--版本集中控制-->
+    <dependencyManagement>
+        <dependencies>
+            <!-- spring-cloud-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!-- spring-cloud-alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <!--打包插件,如果不添加则jar启动找不到main方法-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+        </plugins>
+    </build>
+</project>

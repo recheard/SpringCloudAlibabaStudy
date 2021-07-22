@@ -1,0 +1,16 @@
+server:
+    port: 8092
+
+spring:
+  application:
+    #服务名称
+    name: order-service
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8849
+      discovery:
+        #nacos服务器注册地址
+        server-addr: 127.0.0.1:8849
+  #profiles:
+  #  active: @profile.name@

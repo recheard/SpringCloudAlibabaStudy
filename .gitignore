@@ -25,3 +25,7 @@ hs_err_pid*
 *.lst
 alibaba-test/*/target/*
 *.iml
+
+*/target/*
+
+*/classes/*

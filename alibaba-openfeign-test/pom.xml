@@ -126,14 +126,5 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <!--打包插件,如果不添加则jar启动找不到main方法-->
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
 
-        </plugins>
-    </build>
 </project>

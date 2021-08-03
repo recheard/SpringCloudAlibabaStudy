@@ -6,7 +6,6 @@ spring:
     name: member-server
   cloud:
     nacos:
-
       discovery:
         #nacos服务器注册地址
         server-addr: 127.0.0.1:8849
@@ -15,6 +14,9 @@ spring:
         server-addr: 127.0.0.1:8849
         group: DEFAULT_GROUP
         file-extension: yaml
-
-  #profiles:
-  #  active: @profile.name@
+        #额外再读取多个配置文件
+        shared-configs:
+          - data-id : application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+            refresh: true
+  profiles:
+    active: dev

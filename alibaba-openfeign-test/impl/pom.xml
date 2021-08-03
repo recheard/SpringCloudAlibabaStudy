@@ -26,7 +26,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-
     </dependencies>
     <!--打包插件,如果不添加则jar启动找不到main方法-->
     <build>
@@ -36,5 +35,13 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <!--build节点增加内容-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <!--开启过滤，用指定的参数替换directory下的文件中的参数-->
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 </project>

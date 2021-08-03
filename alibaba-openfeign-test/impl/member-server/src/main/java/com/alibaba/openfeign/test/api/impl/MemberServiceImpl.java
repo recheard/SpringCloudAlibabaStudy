@@ -1,6 +1,8 @@
 package com.alibaba.openfeign.test.api.impl;
 
 import com.alibaba.openfeign.test.api.MemberService;
+import com.alibaba.openfeign.test.config.TestStudentProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +23,9 @@ public class MemberServiceImpl implements MemberService {
     private String test;
 
 
+    @Autowired
+    TestStudentProperties studentProperties;
+
     @Override
     public String hello(Integer userId) {
         return "用户id" + userId + "访问服务： member-service port : " + port;
@@ -30,4 +35,11 @@ public class MemberServiceImpl implements MemberService {
     public String testConfig() {
         return test;
     }
+
+    @Override
+    public String testConfig2() {
+        return studentProperties.getName() + ",年龄：" + studentProperties.getAge();
+    }
+
+
 }

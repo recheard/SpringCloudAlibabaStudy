@@ -2,19 +2,22 @@ server:
     port: 8084
 spring:
   application:
-    #服务名称
-    name: member-server
+    #服务名称  配置为pom中的节点名称
+    name: @artifactId@
   cloud:
     nacos:
-
       discovery:
         #nacos服务器注册地址
-        server-addr: 127.0.0.1:8849
+        server-addr: @config.server-addr@
       #配置文件中心地址
       config:
-        server-addr: 127.0.0.1:8849
-        group: DEFAULT_GROUP
+        server-addr: @config.server-addr@
+        group: @config.group@
         file-extension: yaml
-
-  #profiles:
-  #  active: @profile.name@
+        #额外再读取多个配置文件
+        shared-configs:
+          - data-id : application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
+            refresh: true
+  #设置配置文件环境切换
+  profiles:
+    active: @profile.name@

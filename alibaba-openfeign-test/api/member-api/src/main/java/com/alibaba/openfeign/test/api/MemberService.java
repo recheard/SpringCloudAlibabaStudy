@@ -28,4 +28,12 @@ public interface MemberService {
     @GetMapping("config")
     String testConfig();
 
+
+    /**
+     * 测试读取配置文件中心内容
+     * @return
+     */
+    @GetMapping("config2")
+    String testConfig2();
+
 }

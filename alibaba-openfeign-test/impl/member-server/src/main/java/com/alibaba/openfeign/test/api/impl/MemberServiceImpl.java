@@ -17,7 +17,7 @@ public class MemberServiceImpl implements MemberService {
 
 
     @Override
-    public String hello() {
-        return "member-service port : " + port;
+    public String hello(Integer userId) {
+        return "用户id" + userId + "访问服务： member-service port : " + port;
     }
 }

@@ -2,6 +2,7 @@ package com.alibaba.openfeign.test.api;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author recheard
@@ -16,6 +17,6 @@ public interface MemberService {
      * @return
      */
     @GetMapping("test1")
-    String hello();
+    String hello(@RequestParam(value = "userId") Integer userId);
 
 }

@@ -14,9 +14,18 @@ public interface MemberService {
 
     /**
      * 测试openfeign
+     * @param userId 用户id
      * @return
      */
     @GetMapping("test1")
     String hello(@RequestParam(value = "userId") Integer userId);
+
+
+    /**
+     * 测试读取配置文件中心内容
+     * @return
+     */
+    @GetMapping("config")
+    String testConfig();
 
 }

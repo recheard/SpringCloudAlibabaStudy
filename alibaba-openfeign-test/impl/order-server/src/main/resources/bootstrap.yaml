@@ -4,7 +4,7 @@ server:
 spring:
   application:
     #服务名称
-    name: order-service
+    name: order-server
   cloud:
     nacos:
       config:

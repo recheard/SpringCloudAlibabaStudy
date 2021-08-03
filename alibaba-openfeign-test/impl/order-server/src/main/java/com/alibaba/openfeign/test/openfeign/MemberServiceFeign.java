@@ -8,7 +8,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @description:
  * @date 2021/8/216:12
  */
-@FeignClient("member-service")
+@FeignClient("member-server")
 public interface MemberServiceFeign extends MemberService {
 
 }

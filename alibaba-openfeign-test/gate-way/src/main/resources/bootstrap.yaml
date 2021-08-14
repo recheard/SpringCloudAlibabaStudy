@@ -1,8 +1,7 @@
 server:
-    port: 8084
+  port: 8086
 spring:
   application:
-    #服务名称  配置为pom中的节点名称
     name: @artifactId@
   cloud:
     nacos:
@@ -18,6 +17,22 @@ spring:
         shared-configs:
           - data-id : application-${spring.profiles.active}.${spring.cloud.nacos.config.file-extension}
             refresh: true
+    gateway:
+      discovery:
+        locator:
+          #允许通过注册中心获取地址调用
+          enabled: true
+      #路由策略
+      routes:
+        #路由id
+        - id: member-server
+          #转发地址
+          uri: lb://member-server
+          filters:
+            - StripPrefix=1
+          #匹配规则
+          predicates:
+            - Path=/member/**
   #设置配置文件环境切换
   profiles:
     active: @profile.name@

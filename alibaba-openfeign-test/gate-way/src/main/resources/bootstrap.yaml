@@ -33,6 +33,15 @@ spring:
           #匹配规则
           predicates:
             - Path=/member/**
+        #路由id
+        - id: order-server
+          #转发地址
+          uri: lb://order-server
+          filters:
+            - StripPrefix=1
+          #匹配规则
+          predicates:
+            - Path=/order/**
   #设置配置文件环境切换
   profiles:
     active: @profile.name@

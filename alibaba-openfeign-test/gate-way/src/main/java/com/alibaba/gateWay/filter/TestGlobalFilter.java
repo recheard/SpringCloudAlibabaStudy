@@ -30,7 +30,7 @@ public class TestGlobalFilter implements GlobalFilter, Ordered {
         MultiValueMap<String, String> queryParams = exchange.getRequest().getQueryParams();
 
         //校验token
-        String token = queryParams.getFirst("token");
+        /*String token = queryParams.getFirst("token");
         if (StringUtils.isEmpty(token)) {
             ServerHttpResponse response = exchange.getResponse();
             response.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -38,7 +38,7 @@ public class TestGlobalFilter implements GlobalFilter, Ordered {
             DataBuffer buffer = response.bufferFactory().wrap(msg.getBytes());
             return response.writeWith(Mono.just(buffer));
         }
-        System.out.println("custom global filter");
+        System.out.println("custom global filter");*/
         return chain.filter(exchange);
     }
 

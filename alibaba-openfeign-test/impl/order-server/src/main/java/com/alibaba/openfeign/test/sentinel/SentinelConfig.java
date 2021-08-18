@@ -1,6 +1,9 @@
 package com.alibaba.openfeign.test.sentinel;
 
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
+import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
+import com.alibaba.csp.sentinel.slots.block.degrade.circuitbreaker.CircuitBreakerStrategy;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import org.springframework.boot.ApplicationArguments;
@@ -26,6 +29,23 @@ public class SentinelConfig implements ApplicationRunner {
      */
     @Override
     public void run(ApplicationArguments args) {
+
+        //初始化服务降级
+        List<DegradeRule> rules = new ArrayList<>();
+        DegradeRule rule = new DegradeRule("testSentinelFusing2")
+                .setGrade(CircuitBreakerStrategy.SLOW_REQUEST_RATIO.getType())
+                // Max allowed response time
+                .setCount(50)
+                // Retry timeout (in second)
+                .setTimeWindow(10)
+                // Circuit breaker opens when slow request ratio > 60%
+                .setSlowRatioThreshold(0.6)
+                .setMinRequestAmount(100)
+                .setStatIntervalMs(20000);
+        rules.add(rule);
+
+        DegradeRuleManager.loadRules(rules);
+        //初始化服务限流
         /*List<FlowRule> rules = new ArrayList<>();
         FlowRule rule = new FlowRule();
         //设置限流规则名称 ，可以为接口名

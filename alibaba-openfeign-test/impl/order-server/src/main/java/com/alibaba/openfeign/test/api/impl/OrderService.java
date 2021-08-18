@@ -58,8 +58,20 @@ public class OrderService {
         return memberServiceFeign.hello(234);
     }
 
-    public String getOrderFusingException(BlockException e) {
-        e.printStackTrace();
+    @GetMapping("testSentinelFusing2")
+    @SentinelResource(value = "testSentinelFusing2", blockHandler = "getOrderQpsException",
+            fallback = "getOrderFusingException")
+    public String testSentinelConsole3() {
+        try {
+            Thread.sleep(300);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return memberServiceFeign.hello(234);
+    }
+
+    public String getOrderFusingException() {
         return "该接口已熔断降级";
     }
 
